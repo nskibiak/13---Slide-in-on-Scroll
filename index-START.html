@@ -241,8 +241,14 @@
       function checkSlide(e) {
         images.forEach((image) => {
           const bottomOfScreen = window.scrollY + window.innerHeight;
-          const halfImageShowing = 200 + image.offsetTop + image.height / 2;
-          if (bottomOfScreen >= halfImageShowing) {
+          // adding 200 to account for the top border on body that isn't measured by offsetTop
+          const bodyMargin = 200
+          const halfWayMark = bodyMargin + image.offsetTop + image.height / 2;
+          const imageHalfShown = bottomOfScreen >= halfWayMark;
+          const bottomOfImage = bodyMargin + image.offsetTop + image.height;
+          // changed from bottom of screen to window.scrollY (i.e. what's disappeared above the viewport)
+          const imageNotScrolledPast = window.scrollY < bottomOfImage;
+          if (imageHalfShown && imageNotScrolledPast) {
             image.classList.add('active');
           } else {
             image.classList.remove('active');
