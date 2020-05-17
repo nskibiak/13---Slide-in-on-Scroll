@@ -59,13 +59,12 @@
     }
 
     function checkSlide(e) {
-      console.log('it is working');
-      console.log(e);
+      console.count(e);
     }
 
     const images = document.querySelectorAll('.slide-in');
     // images.forEach(image => addEventListener('onscroll', slideImage));
-    window.addEventListener('scroll', checkSlide);
+    window.addEventListener('scroll', debounce(checkSlide));
   </script>
 
   <style>
