@@ -240,18 +240,16 @@
 
       function checkSlide(e) {
         images.forEach((image) => {
-          let bottomOfScreen = window.scrollY + window.innerHeight;
-          let halfWayMarkOfImage =
-            image.getBoundingClientRect().y +
-            window.innerHeight -
-            image.height / 2;
-
-          if (bottomOfScreen >= halfWayMarkOfImage) {
+          const bottomOfScreen = window.scrollY + window.innerHeight;
+          const halfImageShowing = 200 + image.offsetTop + image.height / 2;
+          if (bottomOfScreen >= halfImageShowing) {
             image.classList.add('active');
+          } else {
+            image.classList.remove('active');
           }
         });
       }
-
+      // const image = document.querySelector('.slide-in');
       const images = document.querySelectorAll('.slide-in');
       window.addEventListener('scroll', debounce(checkSlide));
     </script>
